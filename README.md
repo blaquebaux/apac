@@ -18,16 +18,28 @@ julia --project=engine -e 'using Pkg; Pkg.instantiate()'   # one-time engine set
 
 Regional exposure (EWJ, EWY, EWT, FXI/ASHR, EWA, INDA and peers). The base's Blunt #3 already found the Asia-to-US 'cascade' is priced instantly (no next-day edge), so APAC's edge, if any, is regional rotation and trend, not lead-lag into the US.
 
-## Research plan (Path A — not yet built)
+## Research — first pass done
 
-- Regional trend / rotation across APAC country ETFs.
-- Semis linkage — Taiwan/Korea vs the global chip cycle (cf. Blunt #3, the correlation study).
-- Cross-region rotation with EMEA and LATAM.
+Full detail in [`research/README.md`](research/README.md). The scorecard:
 
-Nothing above is implemented or validated. This is the map, not the territory.
+| # | Question | Verdict |
+|---|----------|---------|
+| 1 | Distinct exposure or US beta? | ❌ US beta — 12 ETFs → **2.5 bets**, corr-SPY 0.79; +0.52/+8%/−39% vs SPY +0.88/+15%/−34% |
+| 1 | What does the unhedged FX cost? | 🔴 huge — Japan EWJ +138% vs hedged DXJ **+367%** = **−229% FX drag** |
+| 2 | Does country rotation add alpha? | ⚠️ APAC alone has a pulse — long-short country momentum **+0.30** (EMEA −0.23, LATAM −0.04) |
+| 2 | Does anything beat SPY? | ❌ no — pooled long +0.59, cross-region rotate +0.60, all < SPY +0.88 |
+
+**The synthesis:** APAC is US beta wearing a flag (12 ETFs → **2.5 bets**, underperforms SPY), and it
+carries the family's most brutal FX drag — currency-hedged Japan (DXJ +367%) *tripled* unhedged Japan
+(EWJ +138%), a **−229%** currency tax as the yen collapsed. But APAC is also the **one** region with a
+real cross-country dispersion pulse: long-short country relative strength earns **+0.30** (Japan /
+Taiwan / Korea / India genuinely diverge), where EMEA and LATAM have none. Not a standalone sleeve, but
+the family's best candidate for a **currency-hedged, cross-country relative-strength input** — with two
+firm rules: hedge the FX, and trade it as relative strength, not directional beta.
 
 ## Status
-**Scaffold.** Engine wired as a submodule; strategy research not yet conducted.
+**Research: first pass complete — a qualified null (US beta + severe FX drag; the one region with a
+rotation pulse)** (`research/`). No live driver. Hedge the FX; trade RS, not beta.
 
 ## The Blaque Baux family
 This repo is one sleeve of the **Blaque Baux** family — a single governed engine steered in
@@ -37,7 +49,7 @@ base/blueprint and holds the [full family roster](https://github.com/Carter-Warr
 ## Layout
 ```
 engine/     the Blaque Baux platform (git submodule -> Carter-Warrens/blaquebaux)
-research/   Path-A strategy sketches (to come)
+research/   two Path-A sketches (regional beta + FX drag, country/region rotation) + scorecard
 live/       governed live drivers (once a sleeve graduates to paper A/B)
 ```
 
