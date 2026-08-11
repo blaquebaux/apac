@@ -39,7 +39,14 @@ firm rules: hedge the FX, and trade it as relative strength, not directional bet
 
 ## Status
 **Research: first pass complete — a qualified null (US beta + severe FX drag; the one region with a
-rotation pulse)** (`research/`). No live driver. Hedge the FX; trade RS, not beta.
+rotation pulse); standalone driver built** (`research/` + `live/`). `live/apac_live.jl` runs the one
+viable expression standalone through the engine's order path + Layer-3 safety gate: long top-third /
+short bottom-third of the APAC country ETFs by 126-day momentum (dollar-neutral cross-country relative
+strength — RS, not beta). **Dry-run by default**; graduates to paper with its own isolated keys. Best
+as a rotation input, not a standalone return sleeve; not validated to the spine's bar.
+```bash
+BB_DRYRUN=1 julia --project=engine live/apac_live.jl
+```
 
 ## The Blaque Baux family
 This repo is one sleeve of the **Blaque Baux** family — a single governed engine steered in
